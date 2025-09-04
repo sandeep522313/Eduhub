@@ -1,0 +1,233 @@
+{%extends 'base.html'%}
+{% load course_tags%}
+{%block title%}
+checkout
+{%endblock%}
+{%block content%}
+
+
+ <!-- PAGE TITLE
+    ================================================== -->
+    <header class="py-8 py-md-10" style="background-image: none;">
+        <div class="container text-center py-xl-2">
+            <h1 class="display-4 fw-semi-bold mb-0">Course Checkout</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-scroll justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a class="text-gray-800" href="{%url 'home'%}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-gray-800 active" aria-current="page">
+                        Course Checkout
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Img -->
+        <img class="d-none img-fluid" src="...html" alt="...">
+    </header>
+
+
+    <!-- SHOP CHECKOUT
+    ================================================== -->
+    <div class="container pb-6 pb-xl-10">
+        <form method="post" class="checkout woocommerce-checkout" action="?action=create_payment" >
+            {% csrf_token %}
+            <div class="col2-set" id="customer_details">
+                <div class="col-1">
+                    <div class="woocommerce-billing-fields">
+                        <h3>Billing details</h3>
+                        <div class="woocommerce-billing-fields__field-wrapper">
+                            <p class="form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="billing_first_name_field" data-priority="10">
+                                <label for="billing_first_name" class="">First name <abbr class="required" title="required">*</abbr></label>
+                                <input type="text" class="input-text " name="first_name" id="billing_first_name" placeholder="" value="{{user.first_name}}" autocomplete="given-name" autofocus="autofocus">
+                            </p>
+                            <p class="form-row form-row-last validate-required" id="billing_last_name_field" data-priority="20">
+                                <label for="billing_last_name" class="">Last name <abbr class="required" title="required">*</abbr></label>
+                                <input type="text" class="input-text " name="last_name" id="billing_last_name" placeholder="" value="{{user.last_name}}" autocomplete="family-name">
+                            </p>
+                            {% comment %} <p class="form-row form-row-wide" id="billing_company_field" data-priority="30">
+                                <label for="billing_company" class="">Company name</label>
+                                <input type="text" class="input-text " name="billing_company" id="billing_company" placeholder="" value="" autocomplete="organization">
+                            </p> {% endcomment %}
+                            <p class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated" id="billing_country_field" data-priority="40">
+                                <label for="billing_country" class="">Country <abbr class="required" title="required">*</abbr></label>
+                                <select name="country" id="billing_country" class="country_to_state country_select  select2-hidden-accessible" autocomplete="country" tabindex="-1" aria-hidden="true">
+                                    <option value="">Select a country…</option>
+                                    <option value="AF">Afghanistan</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="BT">Bhutan</option>
+                                    <option value="IN" selected="selected">India</option>
+                                    <option value="ID">Indonesia</option>
+                                    <option value="IR">Iran</option>
+                                    <option value="IQ">Iraq</option>
+                                    <option value="IE">Ireland</option>
+                                    <option value="IL">Israel</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="JP">Japan</option>                                    
+                                    <option value="KW">Kuwait</option>
+                                    <option value="MY">Malaysia</option>
+                                    <option value="MV">Maldives</option>
+                                    <option value="NP">Nepal</option>
+                                    <option value="NZ">New Zealand</option>
+                                    <option value="PK">Pakistan</option>
+                                    <option value="RU">Russia</option>
+                                    <option value="SA">Saudi Arabia</option>
+                                    <option value="RS">Serbia</option>
+                                    <option value="ZA">South Africa</option>                                   
+                                    <option value="ES">Spain</option>
+                                    <option value="LK">Sri Lanka</option>                                   
+                                    <option value="SE">Sweden</option>
+                                    <option value="CH">Switzerland</option>
+                                    <option value="SY">Syria</option>
+                                    <option value="TW">Taiwan</option>                                   
+                                    <option value="UG">Uganda</option>
+                                    <option value="UA">Ukraine</option>
+                                    <option value="AE">United Arab Emirates</option>
+                                    <option value="GB" >United Kingdom (UK)</option>
+                                    <option value="US">United States (US)</option>                                   
+                                    <option value="ZW">Zimbabwe</option>
+                                </select>
+                            </p>
+                            <p class="form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50">
+                                <label for="billing_address_1" class="">Street address <abbr class="required" title="required">*</abbr></label>
+                                <input type="text" class="input-text " name="address_1" id="billing_address_1" placeholder="House number and street name" value="" autocomplete="address-line1">
+                            </p>
+                            <p class="form-row form-row-wide address-field" id="billing_address_2_field" data-priority="60">
+                                <input type="text" class="input-text " name="address_2" id="billing_address_2" placeholder="Apartment, suite, unit etc. (optional)" value="" autocomplete="address-line2">
+                            </p>
+                            <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-priority="70" data-o_class="form-row form-row-wide address-field validate-required">
+                                <label for="billing_city" class="">Town / City <abbr class="required" title="required">*</abbr></label>
+                                <input type="text" class="input-text " name="city" id="billing_city" placeholder="" value="" autocomplete="address-level2">
+                            </p>
+                            <p class="form-row form-row-wide address-field validate-state" id="billing_state_field" data-priority="80" data-o_class="form-row form-row-wide address-field validate-state">
+                                <label for="billing_state" class="">County</label>
+                                <input type="text" class="input-text " value="" placeholder="" name="state" id="billing_state" autocomplete="address-level1">
+                            </p>
+                            <p class="form-row form-row-wide address-field validate-postcode validate-required" id="billing_postcode_field" data-priority="90" data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                <label for="billing_postcode" class="">Postcode <abbr class="required" title="required">*</abbr></label>
+                                <input type="text" class="input-text " name="billing_postcode" id="postcode" placeholder="" value="" autocomplete="postal-code">
+                            </p>
+                            <p class="form-row form-row-first validate-required validate-phone" id="billing_phone_field" data-priority="100">
+                                <label for="billing_phone" class="">Phone <abbr class="required" title="required">*</abbr></label>
+                                <input type="tel" class="input-text " name="billing_phone" id="phone" placeholder="" value="" autocomplete="tel">
+                            </p>
+                            <p class="form-row form-row-last validate-required validate-email" id="billing_email_field" data-priority="110">
+                                <label for="billing_email" class="">Email address <abbr class="required" title="required">*</abbr></label>
+                                <input type="email" class="input-text " name="billing_email" id="email" placeholder="" value="{{user.email}}" autocomplete="email">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="woocommerce-shipping-fields"></div>
+                    <div class="woocommerce-additional-fields">
+                        <h3>Additional information</h3>
+                        <div class="woocommerce-additional-fields__field-wrapper">
+                            <p class="form-row notes" id="order_comments_field" data-priority=""><label for="order_comments" class="">Order notes</label><textarea name="order_comments" class="input-text " id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="7" cols="5"></textarea></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="order_review" class="woocommerce-checkout-review-order">
+                <div class="woocommerce-checkout-review-order-inner">
+                    <h3 id="order_review_heading">Your order</h3>
+                    <table class="shop_table woocommerce-checkout-review-order-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">Product</th>
+                                <th class="product-total">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cart_item">
+                                <td class="product-name">
+                                    {{course.title}}
+                                 
+                                </td>
+                                <td class="product-total">
+                                    <span class="woocommerce-Price-amount amount">
+                                        <span class="woocommerce-Price-currencySymbol">₹</span>
+                                        {{course.price}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </tfoot>
+                          
+                            <tr class="cart-subtotal">
+                                <th>Discount</th>
+                                <td><span class="woocommerce-Price-amount amount">{{course.discount}} <span class="woocommerce-Price-currencySymbol">%</span></span></td>
+                            </tr>
+
+                            <tr class="order-total">
+                                <th>Total</th>
+                                <td><strong><span class="woocommerce-Price-amount amount"><ins class="h4 mb-0 d-block mb-lg-n1">₹ {% discount_calculation course.price course.discount %}</ins></span></strong> </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div id="payment" class="woocommerce-checkout-payment">
+
+                    <div class="form-row place-order">
+                        <button id="rzp-button1" class="btn btn-primary">
+                            PLACE ORDER
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+   
+
+{%endblock%}
+{%block payment-gatway%}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var options = {
+    "key": "{{ api_key }}", // Enter the Key ID generated from the Dashboard
+    "name": "Acme Corp", //your business name
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo", // Logo URL or path
+    "order_id": "{{ order_id }}", // Order ID obtained from server
+    "handler": function (response) {
+      alert("Payment done successfully!");
+      alert(response.razorpay_payment_id);
+      alert(response.razorpay_order_id);
+      alert(response.razorpay_signature);
+      document.getElementById('myform').submit();
+    
+    },
+    "prefill": {
+      "name": "Gaurav Kumar", // Customer's name
+      "email": "gaurav.kumar@example.com",
+      "contact": "7061808986"
+    },
+    "notes": {
+      "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+      "color": "#3399cc"
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.on('payment.failed', function (response) {
+    alert(response.error.code);
+    alert(response.error.description);
+    alert(response.error.source);
+    alert(response.error.step);
+    alert(response.error.reason);
+    alert(response.error.metadata.order_id);
+    alert(response.error.metadata.payment_id);
+  });
+  document.getElementById('rzp-button1').onclick = function (e) {
+    rzp1.open();
+    e.preventDefault();
+  }
+</script>
+{%endblock payment-gatway%}

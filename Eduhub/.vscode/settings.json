@@ -1,0 +1,6 @@
+{
+    "editor.codeActionsOnSave": {
+
+    },
+    "emmet.includeLanguages": {"django-html":"html"}
+}
