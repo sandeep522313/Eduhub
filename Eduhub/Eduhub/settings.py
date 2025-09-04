@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'Eduhub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'edhub',   # Database name you created in MySQL
+        'USER': 'root',
+        'PASSWORD': 'sandeep1@',
+        'HOST': '127.0.0.1',      # or 'localhost'
+        'PORT': '3306',           # Default MySQL port
     }
 }
 
@@ -142,8 +146,8 @@ LOGOUT_REDIRECT_URL = 'login'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'amankumargiri2022@gmail.com'
-EMAIL_HOST_PASSWORD = '@1manAMNB'
+EMAIL_HOST_USER = 'sandeep522313@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mahadev1@'
 
 # payment implimentation
 ROZORPAY_API_KEY = 'rzp_test_sD5MyOV58OrALf'
